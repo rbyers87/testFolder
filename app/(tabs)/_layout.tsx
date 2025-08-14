@@ -1,12 +1,24 @@
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 
-// Import icons based on platform
-const icons = Platform.OS === 'web' 
-  ? require('lucide-react')
-  : require('lucide-react-native');
+// Platform-specific imports for icons
+let MapPin: any, Search: any, Info: any, Map: any;
 
-const { MapPin, Search, Info, Map } = icons;
+if (Platform.OS === 'web') {
+  // For web
+  const lucide = require('lucide-react');
+  MapPin = lucide.MapPin;
+  Search = lucide.Search;
+  Info = lucide.Info;
+  Map = lucide.Map;
+} else {
+  // For React Native
+  const lucideNative = require('lucide-react-native');
+  MapPin = lucideNative.MapPin;
+  Search = lucideNative.Search;
+  Info = lucideNative.Info;
+  Map = lucideNative.Map;
+}
 
 export default function TabLayout() {
   return (
